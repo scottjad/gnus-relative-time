@@ -2,6 +2,13 @@
 ;;; 2012
 ;;; License: GPL 3
 
+;;; Usage:
+;;; Add %u&relative-time; to your gnus-summary-line-format.
+
+;;; Example:
+;;; (setq-default gnus-summary-line-format
+;;;   "%U%R%z %2t %(%* %s%B%-60=  %-20,20a %u&relative-time;%)\n)")
+
 (defun gnus-user-format-function-relative-time (headers)
   "foo"
   (let ((seconds (time-to-seconds (time-subtract (current-time)
@@ -13,5 +20,3 @@
           ((< seconds (* 60 60 24 61)) (format "%3d weeks" (/ seconds (* 60 60 24 7))))
           ((< seconds (* 60 60 24 (* 2 365))) (format "%3d months" (/ seconds (* 60 60 24 30))))
           (t (format "%3d years" (/ seconds (* 60 60 24 365)))))))
-
-(setq-default  gnus-summary-line-format "%U%R%z %(%* %s%B%-60=  %-20,20f %u&relative-time;%)\n")
